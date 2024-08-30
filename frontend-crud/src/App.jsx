@@ -9,16 +9,19 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <ReservasContextProvider>
+    <div className="bg-zinc-900 h-screen">
       <Navbar />
-      
-      <Routes>
-        <Route path="/" element={<ReservasPage />} />
-        <Route path="/nueva" element={<ReservaForm />} />
-        <Route path="/editar/:id" element={<ReservaForm />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </ReservasContextProvider>
+      <div className="container mx-auto py-4">
+        <ReservasContextProvider>
+          <Routes>
+            <Route path="/" element={<ReservasPage />} />
+            <Route path="/nueva" element={<ReservaForm />} />
+            <Route path="/editar/:id" element={<ReservaForm />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ReservasContextProvider>
+      </div>
+    </div>
   );
 }
 
