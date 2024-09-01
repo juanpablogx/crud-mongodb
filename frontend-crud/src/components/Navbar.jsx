@@ -7,7 +7,7 @@ const Navbar = () => {
         <h1>Mis Reservas</h1>
       </Link>
 
-      <ul className="flex gap-x-1">
+      <ul className="flex gap-x-2">
         <li>
           <Link to="/" className="bg-slate-200 px-2 py-1">Home</Link>
         </li>
