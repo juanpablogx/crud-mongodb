@@ -4,7 +4,7 @@ import { createReservaRequest } from "./../api/reserva.api.js";
 import { deleteReservaRequest } from "../api/reserva.api";
 import { getReservaRequest } from "../api/reserva.api";
 import { updateReservaRequest } from "../api/reserva.api";
-import { toggleReservaPaidRequest } from "../api/reserva.api";
+/* import { toggleReservaPaidRequest } from "../api/reserva.api"; */
 import { ReservasContext } from "./ReservasContext";
 
 export const ReservasContextProvider = ({ children }) => {
@@ -12,14 +12,13 @@ export const ReservasContextProvider = ({ children }) => {
 
   const fetchReservas = async () => {
     const reservas = await getReservasRequest();
-    console.log(reservas);
     setReservas(reservas);
   };
 
   const deleteReserva = async (id) => {
     try {
       const response = await deleteReservaRequest(id);
-      setReservas(reservas.filter((reserva) => reserva.id !== id));
+      setReservas(reservas.filter((reserva) => reserva._id !== id));
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -38,7 +37,7 @@ export const ReservasContextProvider = ({ children }) => {
   const getReserva = async (id) => {
     try {
       const response = await getReservaRequest(id);
-      console.log(response);
+      return response;
     } catch (error) {
       console.error(error);
     }
@@ -53,19 +52,19 @@ export const ReservasContextProvider = ({ children }) => {
     }
   };
 
-  const toggleReservaPaid = async (id) => {
+  /* const toggleReservaPaid = async (id) => {
     try {
-      const reserva = reservas.find((reserva) => reserva.id === id);
-      await toggleReservaPaidRequest(id, reserva.pagada === 0 ? 1 : 0);
+      const reserva = reservas.find((reserva) => reserva._id === id);
+      await toggleReservaPaidRequest(id, reserva.estado_reserva === 0 ? 1 : 0);
       setReservas(
         reservas.map((reserva) =>
-          reserva.id === id ? { ...reserva, pagada: !reserva.pagada } : reserva
+          reserva._id === id ? { ...reserva, estado_reserva: !reserva.estado_reserva } : reserva
         )
       );
     } catch (error) {
       console.error(error);
     }
-  };
+  }; */
 
   return (
     <ReservasContext.Provider
@@ -76,7 +75,7 @@ export const ReservasContextProvider = ({ children }) => {
         createReserva,
         getReserva,
         updateReserva,
-        toggleReservaPaid,
+        /* toggleReservaPaid, */
       }}
     >
       {children}
